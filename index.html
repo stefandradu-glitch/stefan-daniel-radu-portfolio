@@ -1,109 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stefan Radu — Aerospace Engineer</title>
 <style>
   :root {
-    --bg: #0a0a0f;
-    --bg2: #111118;
-    --bg3: #1a1a24;
-    --accent: #00d4ff;
-    --accent2: #7b2fff;
-    --text: #e8e8f0;
-    --muted: #7a7a9a;
-    --border: #2a2a3a;
+    --bg:#0a0a0f; --bg2:#111118; --bg3:#1a1a24;
+    --accent:#00d4ff; --accent2:#7b2fff;
+    --text:#e8e8f0; --muted:#7a7a9a; --border:#2a2a3a;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; }
-  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; overflow-x:hidden; }
-
-  nav {
-    position:fixed; top:0; width:100%; z-index:100;
-    background:rgba(10,10,15,0.85); backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-    display:flex; justify-content:space-between; align-items:center;
-    padding:1rem 2.5rem;
+  [data-theme="light"] {
+    --bg:#f0f2f8; --bg2:#ffffff; --bg3:#e4e8f0;
+    --accent:#0099cc; --accent2:#6020cc;
+    --text:#1a1a2e; --muted:#555577; --border:#c8cce0;
   }
-  .logo { font-weight:700; font-size:1.1rem; letter-spacing:2px; color:var(--accent); }
-  .nav-links { display:flex; gap:2rem; list-style:none; }
-  .nav-links a { color:var(--muted); text-decoration:none; font-size:.9rem; letter-spacing:1px; text-transform:uppercase; transition:.2s; }
-  .nav-links a:hover { color:var(--accent); }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden;transition:background .3s,color .3s;}
 
-  .hero {
-    min-height:100vh; display:flex; align-items:center; justify-content:center;
-    padding:6rem 2rem 4rem; position:relative; overflow:hidden;
-  }
-  .hero-bg {
-    position:absolute; inset:0; z-index:0;
-    background: radial-gradient(ellipse at 70% 50%, rgba(123,47,255,.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 20% 80%, rgba(0,212,255,.1) 0%, transparent 50%);
-  }
-  .grid-lines {
-    position:absolute; inset:0; z-index:0;
-    background-image: linear-gradient(rgba(0,212,255,.04) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(0,212,255,.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-  .hero-content { position:relative; z-index:1; max-width:700px; }
-  .hero-tag { display:inline-block; background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.3); color:var(--accent); font-size:.8rem; letter-spacing:2px; padding:.35rem 1rem; border-radius:2px; margin-bottom:1.5rem; text-transform:uppercase; }
-  h1 { font-size:clamp(2.8rem,7vw,5rem); font-weight:800; line-height:1.05; letter-spacing:-1px; }
-  h1 span { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-  .hero-sub { margin:1.5rem 0 2.5rem; color:var(--muted); font-size:1.1rem; line-height:1.7; max-width:520px; }
-  .btn { display:inline-flex; align-items:center; gap:.6rem; padding:.85rem 2rem; background:var(--accent); color:#000; font-weight:700; font-size:.95rem; text-decoration:none; border-radius:3px; letter-spacing:.5px; transition:.2s; }
-  .btn:hover { background:#fff; transform:translateY(-2px); }
-  .btn-ghost { background:transparent; color:var(--accent); border:1px solid var(--accent); margin-left:1rem; }
-  .btn-ghost:hover { background:rgba(0,212,255,.1); color:var(--accent); }
-  .hero-stats { display:flex; gap:2.5rem; margin-top:3rem; padding-top:2rem; border-top:1px solid var(--border); }
-  .stat-num { font-size:1.8rem; font-weight:800; color:var(--accent); }
-  .stat-label { font-size:.8rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;padding:1rem 2.5rem;transition:background .3s;}
+  [data-theme="light"] nav{background:rgba(240,242,248,0.88);}
+  .logo{font-weight:700;font-size:1.1rem;letter-spacing:2px;color:var(--accent);}
+  .nav-right{display:flex;align-items:center;gap:2rem;}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;transition:.2s;}
+  .nav-links a:hover{color:var(--accent);}
+  .theme-toggle{background:var(--bg3);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.2s;}
+  .theme-toggle:hover{border-color:var(--accent);}
 
-  section { padding:5rem 2rem; max-width:1100px; margin:0 auto; }
-  .section-label { font-size:.75rem; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:.75rem; }
-  h2 { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; margin-bottom:3rem; }
-  h2 em { font-style:normal; color:var(--accent); }
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 70% 50%,rgba(123,47,255,.15) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(0,212,255,.1) 0%,transparent 50%);}
+  .grid-lines{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,212,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.04) 1px,transparent 1px);background-size:60px 60px;}
+  .hero-content{position:relative;z-index:1;max-width:700px;}
+  .hero-tag{display:inline-block;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:var(--accent);font-size:.8rem;letter-spacing:2px;padding:.35rem 1rem;border-radius:2px;margin-bottom:1.5rem;text-transform:uppercase;}
+  h1{font-size:clamp(2.8rem,7vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-1px;}
+  h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .typing-wrap{min-height:2rem;margin-bottom:.5rem;}
+  #typed{color:var(--accent);font-size:1.1rem;font-weight:600;letter-spacing:1px;}
+  #cursor{display:inline-block;width:2px;height:1.1rem;background:var(--accent);margin-left:2px;animation:blink .7s infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+  .hero-sub{margin:1rem 0 2.5rem;color:var(--muted);font-size:1.05rem;line-height:1.7;max-width:520px;}
+  .btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 2rem;background:var(--accent);color:#000;font-weight:700;font-size:.95rem;text-decoration:none;border-radius:3px;letter-spacing:.5px;transition:.2s;border:none;cursor:pointer;}
+  .btn:hover{background:#fff;transform:translateY(-2px);}
+  .btn-ghost{background:transparent;color:var(--accent);border:1px solid var(--accent);margin-left:1rem;}
+  .btn-ghost:hover{background:rgba(0,212,255,.1);color:var(--accent);}
+  .hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);}
+  .stat-num{font-size:1.8rem;font-weight:800;color:var(--accent);}
+  .stat-label{font-size:.8rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
 
-  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
-  .about-text p { color:var(--muted); line-height:1.8; margin-bottom:1rem; }
-  .about-text strong { color:var(--text); }
-  .skills-block h3 { font-size:.85rem; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:1rem; }
-  .skill-group { margin-bottom:2rem; }
-  .skill-tags { display:flex; flex-wrap:wrap; gap:.5rem; }
-  .tag { background:var(--bg3); border:1px solid var(--border); color:var(--text); font-size:.8rem; padding:.35rem .85rem; border-radius:2px; letter-spacing:.5px; }
-  .tag.hi { border-color:rgba(0,212,255,.4); color:var(--accent); background:rgba(0,212,255,.07); }
+  /* SECTIONS */
+  section{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+  .section-label{font-size:.75rem;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:.75rem;}
+  h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-bottom:3rem;}
+  h2 em{font-style:normal;color:var(--accent);}
 
-  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
-  .project-card {
-    background:var(--bg2); border:1px solid var(--border); border-radius:4px;
-    padding:1.8rem; transition:.3s; cursor:default;
-  }
-  .project-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,212,255,.08); }
-  .project-card h3 { font-size:1.05rem; margin-bottom:.6rem; }
-  .project-card p { color:var(--muted); font-size:.88rem; line-height:1.6; margin-bottom:1rem; }
-  .project-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
-  .project-tag { font-size:.72rem; padding:.25rem .65rem; background:var(--bg3); border:1px solid var(--border); border-radius:2px; color:var(--muted); letter-spacing:.5px; }
-  .role-badge { display:inline-block; font-size:.7rem; padding:.2rem .6rem; background:rgba(123,47,255,.2); border:1px solid rgba(123,47,255,.4); color:#b085ff; border-radius:2px; letter-spacing:1px; margin-bottom:.75rem; text-transform:uppercase; }
-  .badge-progress { background:rgba(0,212,255,.15); border-color:rgba(0,212,255,.4); color:#00d4ff; }
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+  .about-text p{color:var(--muted);line-height:1.8;margin-bottom:1rem;}
+  .about-text strong{color:var(--text);}
 
-  .contact-box {
-    background:var(--bg2); border:1px solid var(--border); border-radius:4px;
-    padding:3rem; text-align:center;
-    background-image: radial-gradient(ellipse at 50% 0%, rgba(0,212,255,.08) 0%, transparent 60%);
-  }
-  .contact-box p { color:var(--muted); margin:.75rem 0 2rem; font-size:1.05rem; }
-  .contact-links { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; }
+  /* SKILLS */
+  .skills-block h3{font-size:.85rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:1rem;}
+  .skill-group{margin-bottom:1.5rem;}
+  .skill-bar-wrap{margin-bottom:.75rem;}
+  .skill-bar-label{display:flex;justify-content:space-between;margin-bottom:.3rem;font-size:.85rem;}
+  .skill-bar-label span:last-child{color:var(--accent);font-weight:600;}
+  .skill-bar-bg{background:var(--bg3);border-radius:2px;height:6px;overflow:hidden;}
+  .skill-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width 1.2s ease;}
 
-  footer { text-align:center; padding:2rem; color:var(--muted); font-size:.8rem; border-top:1px solid var(--border); }
+  /* TIMELINE */
+  .timeline{position:relative;padding-left:2rem;}
+  .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--accent2));}
+  .tl-item{position:relative;margin-bottom:2.5rem;}
+  .tl-dot{position:absolute;left:-2.45rem;top:.3rem;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(0,212,255,.2);}
+  .tl-date{font-size:.75rem;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:.25rem;}
+  .tl-title{font-weight:700;margin-bottom:.25rem;}
+  .tl-sub{font-size:.88rem;color:var(--muted);}
 
-  .fade-up { opacity:0; transform:translateY(30px); transition:.6s ease; }
-  .fade-up.visible { opacity:1; transform:translateY(0); }
+  /* PROJECTS */
+  .filter-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;}
+  .filter-btn{padding:.4rem 1rem;border:1px solid var(--border);background:var(--bg2);color:var(--muted);border-radius:2px;cursor:pointer;font-size:.8rem;letter-spacing:.5px;transition:.2s;}
+  .filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(0,212,255,.07);}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+  .project-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.8rem;transition:.3s .05s;cursor:default;}
+  .project-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,212,255,.08);}
+  .project-card.hidden{display:none;}
+  .project-card h3{font-size:1.05rem;margin-bottom:.6rem;}
+  .project-card p{color:var(--muted);font-size:.88rem;line-height:1.6;margin-bottom:1rem;}
+  .project-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+  .project-tag{font-size:.72rem;padding:.25rem .65rem;background:var(--bg3);border:1px solid var(--border);border-radius:2px;color:var(--muted);letter-spacing:.5px;}
+  .role-badge{display:inline-block;font-size:.7rem;padding:.2rem .6rem;background:rgba(123,47,255,.2);border:1px solid rgba(123,47,255,.4);color:#b085ff;border-radius:2px;letter-spacing:1px;margin-bottom:.75rem;text-transform:uppercase;}
+  .badge-progress{background:rgba(0,212,255,.15);border-color:rgba(0,212,255,.4);color:#00d4ff;}
+
+  /* CONTACT */
+  .contact-box{position:relative;border:1px solid var(--border);border-radius:4px;padding:3rem;overflow:hidden;text-align:center;}
+  .contact-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0.18;}
+  .contact-inner{position:relative;z-index:1;}
+  .contact-inner p{color:var(--muted);line-height:1.8;margin-bottom:1.5rem;font-size:1.05rem;}
+  .contact-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+  .contact-form{display:flex;flex-direction:column;gap:1rem;max-width:480px;margin:2rem auto 0;}
+  .form-group{display:flex;flex-direction:column;gap:.4rem;}
+  .form-group label{font-size:.8rem;letter-spacing:1px;color:var(--muted);text-transform:uppercase;text-align:left;}
+  .form-group input,.form-group textarea{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text);padding:.75rem 1rem;border-radius:3px;font-family:inherit;font-size:.9rem;transition:.2s;}
+  .form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--accent);}
+  .form-group textarea{resize:vertical;min-height:110px;}
+  .form-submit{align-self:center;}
+
+  footer{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);}
+
+  .fade-up{opacity:0;transform:translateY(30px);transition:.6s ease;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
 
   @media(max-width:700px){
-    .about-grid { grid-template-columns:1fr; }
-    .hero-stats { gap:1.5rem; }
-    nav { padding:1rem 1.2rem; }
-    .nav-links { gap:1.2rem; }
+    .about-grid,.contact-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:1.5rem;}
+    nav{padding:1rem 1.2rem;}
+    .nav-links{gap:1.2rem;}
   }
 </style>
 </head>
@@ -111,33 +126,40 @@
 
 <nav>
   <div class="logo">SR</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeBtn" title="Toggle theme">🌙</button>
+  </div>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="grid-lines"></div>
   <div class="hero-content">
     <div class="hero-tag">Aerospace Engineer</div>
     <h1>Stefan<br><span>Daniel Radu</span></h1>
+    <div class="typing-wrap"><span id="typed"></span><span id="cursor"></span></div>
     <p class="hero-sub">BEng Aerospace Engineering graduate specialising in structural analysis, CAD design, and UAV systems — turning complex engineering problems into precise, simulation-backed solutions.</p>
     <div>
       <a href="#projects" class="btn">View My Work</a>
       <a href="#contact" class="btn btn-ghost">Get In Touch</a>
     </div>
     <div class="hero-stats">
-      <div><div class="stat-num">4</div><div class="stat-label">Major Projects</div></div>
-      <div><div class="stat-num">2</div><div class="stat-label">Team Lead Roles</div></div>
-      <div><div class="stat-num">6+</div><div class="stat-label">CAD & CAE Tools</div></div>
+      <div><div class="stat-num" data-target="4">0</div><div class="stat-label">Major Projects</div></div>
+      <div><div class="stat-num" data-target="2">0</div><div class="stat-label">Team Lead Roles</div></div>
+      <div><div class="stat-num" data-target="6">0</div><div class="stat-label">CAD & CAE Tools</div></div>
     </div>
   </div>
 </div>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="fade-up">
     <div class="section-label">Background</div>
@@ -146,31 +168,29 @@
       <div class="about-text">
         <p>I'm a <strong>BEng Aerospace Engineering</strong> graduate from the University of Hertfordshire (2025), with a strong focus on structural design, CAE simulation, and UAV systems development.</p>
         <p>My degree project centred on <strong>composite UAV wing structural optimisation</strong>, combining FEA simulation with real-world design constraints. Across my studies I led teams of up to 8 members on multi-disciplinary aircraft and rover design challenges.</p>
-        <p>I'm passionate about aerospace and defence, automotive engineering, and pushing the boundaries of what CAD and simulation tools can achieve — whether that's optimising aerostructures or designing from scratch in Fusion 360.</p>
+        <p>Outside of academia, I have a deep passion for <strong>Formula 1</strong> — the sport's relentless pursuit of aerodynamic and structural performance mirrors exactly the kind of precision engineering I want to build a career in. I'm equally drawn to the <strong>defence sector</strong>, where the demands for quality, reliability, and innovation are uncompromising.</p>
+        <p>Above all, I believe that <strong>quality of work is non-negotiable</strong>. Whether it's a simulation, a CAD model, or an analysis report, I hold every piece of work to the highest standard — because in engineering, the details matter.</p>
       </div>
-      <div class="skills-block" id="skills">
-        <div class="skill-group">
-          <h3>CAD & Design</h3>
-          <div class="skill-tags">
-            <span class="tag hi">SolidWorks</span><span class="tag hi">CATIA V5</span><span class="tag hi">Fusion 360</span><span class="tag">AutoCAD</span>
+      <div id="skills">
+        <div class="section-label" style="margin-bottom:.75rem;">Skills</div>
+        <div class="skills-block">
+          <div class="skill-group">
+            <h3>CAD & Design</h3>
+            <div class="skill-bar-wrap"><div class="skill-bar-label"><span>SolidWorks</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div>
+            <div class="skill-bar-wrap"><div class="skill-bar-label"><span>CATIA V5</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div>
+            <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Fusion 360</span><span>75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="75"></div></div></div>
+            <div class="skill-bar-wrap"><div class="skill-bar-label"><span>AutoCAD</span><span>65%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="65"></div></div></div>
           </div>
-        </div>
-        <div class="skill-group">
-          <h3>Simulation & CAE</h3>
-          <div class="skill-tags">
-            <span class="tag hi">SolidWorks FEA</span><span class="tag hi">SimScale</span><span class="tag">CFD</span><span class="tag">Structural Analysis</span>
+          <div class="skill-group">
+            <h3>Simulation & CAE</h3>
+            <div class="skill-bar-wrap"><div class="skill-bar-label"><span>SolidWorks FEA</span><span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
+            <div class="skill-bar-wrap"><div class="skill-bar-label"><span>SimScale</span><span>75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="75"></div></div></div>
           </div>
-        </div>
-        <div class="skill-group">
-          <h3>Programming</h3>
-          <div class="skill-tags">
-            <span class="tag hi">Python</span><span class="tag">C++</span><span class="tag">Arduino IDE</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3>Disciplines</h3>
-          <div class="skill-tags">
-            <span class="tag">Aerostructures</span><span class="tag">UAV Systems</span><span class="tag">Composite Materials</span><span class="tag">Project Management</span>
+          <div class="skill-group">
+            <h3>Programming</h3>
+            <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Python</span><span>70%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div></div>
+            <div class="skill-bar-wrap"><div class="skill-bar-label"><span>C++</span><span>50%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="50"></div></div></div>
+            <div class="skill-bar-wrap"><div class="skill-bar-label"><span>Arduino IDE</span><span>60%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="60"></div></div></div>
           </div>
         </div>
       </div>
@@ -178,14 +198,87 @@
   </div>
 </section>
 
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="fade-up">
+    <div class="section-label">Journey</div>
+    <h2>My <em>Timeline</em></h2>
+    <div class="timeline">
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Sep 2020 — Sep 2022</div>
+        <div class="tl-title">BTEC Level 3 Extended Diploma in Engineering — UTC Heathrow</div>
+        <div class="tl-sub">Achieved DDM (Distinction, Distinction, Merit). Hands-on engineering education covering mechanical, electronic and technical disciplines with practical workshop experience on lathes, pillar drills and fabrication equipment.</div>
+      </div>
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Sep 2022 — Sep 2025</div>
+        <div class="tl-title">BEng (Hons) Aerospace Engineering — University of Hertfordshire</div>
+        <div class="tl-sub">Studied aerodynamics, composite materials, structural analysis and manufacturing processes. Gained hands-on experience with lathes, pillar drills and 3D printers, and produced detailed technical documentation to a professional standard throughout.</div>
+      </div>
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Sep 2022 — Sep 2023</div>
+        <div class="tl-title">Project Team Leader — University Engineering Projects</div>
+        <div class="tl-sub">Elected team leader across two consecutive engineering design and build projects, coordinating task allocation, progress tracking and cross-disciplinary communication throughout.</div>
+      </div>
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2023 — 2024</div>
+        <div class="tl-title">Team Leader — Quadcopter UAV Structural Design (7 Members)</div>
+        <div class="tl-sub">Led a 7-member team coordinating multiple workstreams simultaneously. Produced detailed technical 2D drawings and CAE outputs in CATIA V5, including layouts and system documentation.</div>
+      </div>
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2023 — 2024</div>
+        <div class="tl-title">Team Leader — Aircraft Concept Design (8 Members)</div>
+        <div class="tl-sub">Led an 8-member multidisciplinary team through a full project lifecycle — coordinating workstreams, managing communication and driving delivery to deadline. Contributed to cost analysis, feasibility modelling and commercial viability assessment.</div>
+      </div>
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Sep 2024 — Apr 2025</div>
+        <div class="tl-title">Dissertation — Composite UAV Wing Optimisation</div>
+        <div class="tl-sub">Solely responsible for scoping, planning and delivering a complex analytical research project from initial brief to final professional report — entirely without supervision. Designed and analysed a full UAV wing structure using advanced composite materials.</div>
+      </div>
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Mar 2025 — May 2025</div>
+        <div class="tl-title">Delivery Driver — Tesco</div>
+        <div class="tl-sub">Verified documentation and order accuracy before every dispatch. Coordinated with warehouse and dispatch teams to ensure seamless order processing throughout each shift.</div>
+      </div>
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-date">May 2025 — Aug 2025</div>
+        <div class="tl-title">Construction Worker — Thorn Plant Hire</div>
+        <div class="tl-sub">Received, inspected and recorded equipment and materials across a busy industrial site. Operated industrial tools and heavy equipment safely to strict health and safety standards.</div>
+      </div>
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2025 — Present</div>
+        <div class="tl-title">Seeking Graduate Engineering Roles</div>
+        <div class="tl-sub">Actively pursuing entry-level roles in aerospace, defence, and related engineering sectors. Currently developing portfolio projects in Fusion 360 and SimScale.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
 <section id="projects" style="padding-top:2rem;">
   <div class="fade-up">
     <div class="section-label">Work</div>
     <h2>Featured <em>Projects</em></h2>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="fea">FEA</button>
+      <button class="filter-btn" data-filter="cad">CAD</button>
+      <button class="filter-btn" data-filter="uav">UAV</button>
+      <button class="filter-btn" data-filter="team">Team Lead</button>
+      <button class="filter-btn" data-filter="progress">In Progress</button>
+    </div>
   </div>
   <div class="projects-grid">
 
-    <div class="project-card fade-up">
+    <div class="project-card fade-up" data-tags="fea cad uav">
       <div class="role-badge">Dissertation</div>
       <h3>Composite UAV Wing Structural Optimisation</h3>
       <p>Final year dissertation focusing on structural analysis and optimisation of a composite UAV wing. Conducted comprehensive FEA simulations to evaluate stress distribution, deflection, and failure modes under varied loading conditions.</p>
@@ -194,7 +287,7 @@
       </div>
     </div>
 
-    <div class="project-card fade-up">
+    <div class="project-card fade-up" data-tags="fea cad uav team">
       <div class="role-badge">Team Leader · 7 Members</div>
       <h3>Quadrotor UAV Structural Design & CAE</h3>
       <p>Led a 7-member team in the full structural design and CAE analysis of a quadrotor UAV. Responsibilities spanned frame geometry, material selection, load case definition, and FEA validation of critical components.</p>
@@ -203,16 +296,16 @@
       </div>
     </div>
 
-    <div class="project-card fade-up">
+    <div class="project-card fade-up" data-tags="cad team">
       <div class="role-badge">Team Leader · 8 Members</div>
       <h3>Aircraft Concept Design Project</h3>
-      <p>Led an 8-member team through a full aircraft concept design cycle — from initial requirements and configuration selection through to 3D CAD modelling, aerodynamic sizing, and performance estimation. The project targeted a hydrogen-electric regional aircraft with 40-passenger capacity and 500 nautical mile range, compliant with EASA CS-25.</p>
+      <p>Led an 8-member team through a full aircraft concept design cycle — from initial requirements and configuration selection through to 3D CAD modelling, aerodynamic sizing, and performance estimation. Targeted a hydrogen-electric regional aircraft with 40-passenger capacity and 500 NM range, compliant with EASA CS-25.</p>
       <div class="project-tags">
-        <span class="project-tag">CATIA V5</span><span class="project-tag">Aerodynamics</span><span class="project-tag">Team Lead</span><span class="project-tag">Concept Design</span><span class="project-tag">Hydrogen-Electric</span>
+        <span class="project-tag">CATIA V5</span><span class="project-tag">Aerodynamics</span><span class="project-tag">Team Lead</span><span class="project-tag">Hydrogen-Electric</span>
       </div>
     </div>
 
-    <div class="project-card fade-up">
+    <div class="project-card fade-up" data-tags="cad fea">
       <div class="role-badge">Engineering Project</div>
       <h3>Autonomous Mars Rover</h3>
       <p>Designed and developed an autonomous Mars Rover concept, encompassing chassis structural design, wheel and suspension geometry, power systems layout, and embedded programming for autonomous navigation logic.</p>
@@ -221,7 +314,7 @@
       </div>
     </div>
 
-    <div class="project-card fade-up">
+    <div class="project-card fade-up" data-tags="fea cad progress">
       <div class="role-badge badge-progress">In Progress</div>
       <h3>BMW E46 Style 32 Wheel — Static Load FEA</h3>
       <p>CAD modelling of the iconic Style 32 multi-spoke alloy wheel (8Jx18 ET47) in Fusion 360, followed by static load FEA to evaluate structural performance under typical vehicle loading conditions. Focus on spoke stress distribution and hub deflection.</p>
@@ -230,7 +323,7 @@
       </div>
     </div>
 
-    <div class="project-card fade-up">
+    <div class="project-card fade-up" data-tags="fea cad uav progress">
       <div class="role-badge badge-progress">In Progress</div>
       <h3>NACA 4412 Wing Section — UAV & Light Aircraft Analysis</h3>
       <p>Comprehensive aerofoil study justifying the NACA 4412 selection for UAV and light aircraft applications. Analysis covers wing section aerodynamics, chord length sizing, angle of attack range, and material selection — culminating in FEA stress analysis under representative flight loads.</p>
@@ -242,15 +335,34 @@
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="fade-up">
     <div class="section-label">Connect</div>
     <h2>Get In <em>Touch</em></h2>
     <div class="contact-box">
-      <p>I'm actively looking for entry-level engineering roles in aerospace, defence, and related sectors.<br>If you have an opportunity or just want to connect — reach out.</p>
-      <div class="contact-links">
-        <a href="https://linkedin.com/in/stefan-daniel-radu" target="_blank" class="btn">LinkedIn Profile</a>
-        <a href="mailto:stefan.d.radu@gmail.com" class="btn btn-ghost">Send Email</a>
+      <canvas class="contact-canvas" id="globeCanvas"></canvas>
+      <div class="contact-inner">
+        <p>I'm actively looking for entry-level engineering roles in aerospace, defence, and related sectors.<br>If you have an opportunity or just want to connect — reach out.</p>
+        <div class="contact-btns">
+          <a href="https://linkedin.com/in/stefan-daniel-radu" target="_blank" class="btn">LinkedIn Profile</a>
+          <a href="mailto:stefan.d.radu@gmail.com" class="btn btn-ghost">Send Email</a>
+        </div>
+        <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" placeholder="Your message..." required></textarea>
+          </div>
+          <button type="submit" class="btn form-submit">Send Message</button>
+        </form>
       </div>
     </div>
   </div>
@@ -261,9 +373,223 @@
 </footer>
 
 <script>
-  const els = document.querySelectorAll('.fade-up');
-  const obs = new IntersectionObserver(entries => {
+  // Theme toggle
+  const btn = document.getElementById('themeBtn');
+  btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    btn.textContent = isDark ? '🌙' : '☀️';
+  });
+
+  // Typing animation
+  const phrases = ['Structural Engineer', 'CAD/CAE Specialist', 'UAV Systems Designer', 'Aerospace Graduate'];
+  let pi = 0, ci = 0, del = false;
+  const el = document.getElementById('typed');
+  function type() {
+    const word = phrases[pi];
+    el.textContent = del ? word.substring(0, ci--) : word.substring(0, ci++);
+    if (!del && ci > word.length) { del = true; setTimeout(type, 1200); return; }
+    if (del && ci < 0) { del = false; pi = (pi + 1) % phrases.length; ci = 0; }
+    setTimeout(type, del ? 60 : 100);
+  }
+  type();
+
+  // Counter animation
+  function animateCounter(el) {
+    const target = +el.dataset.target;
+    let cur = 0;
+    const step = Math.ceil(target / 30);
+    const t = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      el.textContent = cur + (target === 6 ? '+' : '');
+      if (cur >= target) clearInterval(t);
+    }, 50);
+  }
+  const counters = document.querySelectorAll('.stat-num[data-target]');
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); }});
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObs.observe(c));
+
+  // Skill bars
+  const bars = document.querySelectorAll('.skill-bar-fill');
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.style.width = e.target.dataset.width + '%'; barObs.unobserve(e.target); }});
+  }, { threshold: 0.3 });
+  bars.forEach(b => barObs.observe(b));
+
+  // Fade up
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => fadeObs.observe(el));
+
+  // Globe canvas background
+  (function(){
+    const canvas = document.getElementById('globeCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, cx, cy, R, t = 0;
+
+    // Simplified real country outline points [lon, lat] paths
+    const lands = [
+      // North America rough outline
+      [[[-140,60],[-125,48],[-122,37],[-117,32],[-97,26],[-87,30],[-80,25],[-80,35],[-75,45],[-70,47],[-65,44],[-60,46],[-65,50],[-75,55],[-85,60],[-90,65],[-100,68],[-110,68],[-120,65],[-130,60],[-140,60]]],
+      // South America
+      [[[-80,10],[-75,0],[-70,-10],[-65,-20],[-60,-30],[-55,-35],[-50,-28],[-45,-23],[-40,-15],[-38,-8],[-35,0],[-40,5],[-50,5],[-55,8],[-60,10],[-70,12],[-80,10]]],
+      // Europe
+      [[[-10,36],[0,36],[10,36],[20,38],[28,42],[30,46],[25,50],[20,55],[15,58],[10,56],[5,53],[0,50],[-5,48],[-10,44],[-10,36]]],
+      // Africa
+      [[[-18,15],[-15,10],[-15,5],[-10,5],[0,5],[10,5],[15,10],[20,15],[25,20],[30,25],[35,20],[40,15],[42,10],[40,5],[35,0],[30,-5],[25,-10],[20,-20],[18,-30],[16,-35],[20,-35],[25,-30],[30,-25],[35,-20],[40,-15],[42,-10],[40,0],[38,8],[42,12],[45,10],[42,15],[38,20],[35,25],[30,28],[25,30],[20,30],[15,28],[10,25],[5,20],[0,15],[-5,15],[-10,18],[-18,15]]],
+      // Asia
+      [[[25,42],[30,46],[35,48],[40,50],[50,55],[60,55],[70,55],[80,52],[90,55],[100,55],[110,52],[120,50],[130,48],[135,45],[138,40],[135,35],[130,32],[125,28],[120,25],[115,22],[110,18],[105,12],[100,5],[95,3],[90,8],[85,12],[80,15],[75,20],[70,22],[65,25],[60,22],[55,25],[50,28],[45,32],[40,38],[35,42],[30,42],[25,42]]],
+      // Australia
+      [[[115,-22],[120,-18],[125,-15],[130,-12],[135,-12],[140,-15],[145,-18],[150,-22],[152,-27],[150,-32],[148,-38],[145,-38],[140,-35],[135,-32],[130,-32],[125,-32],[120,-28],[115,-25],[115,-22]]],
+      // UK roughly
+      [[[-5,50],[0,51],[2,52],[1,54],[-1,56],[-3,58],[-5,57],[-6,55],[-5,52],[-3,51],[-5,50]]],
+    ];
+
+    function resize(){
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+      cx = W/2; cy = H/2;
+      R = Math.min(W, H) * 0.38;
+    }
+
+    function project(lon, lat, rot){
+      const lng = (lon + rot) * Math.PI/180;
+      const la = lat * Math.PI/180;
+      const x3 = Math.cos(la) * Math.sin(lng);
+      const y3 = Math.sin(la);
+      const z3 = Math.cos(la) * Math.cos(lng);
+      if(z3 < 0) return null;
+      return { x: cx + R * x3, y: cy - R * y3, z: z3 };
+    }
+
+    function drawGlobe(rot){
+      ctx.clearRect(0,0,W,H);
+
+      // Globe base
+      const grad = ctx.createRadialGradient(cx-R*0.3, cy-R*0.3, R*0.1, cx, cy, R);
+      grad.addColorStop(0,'rgba(0,180,255,0.12)');
+      grad.addColorStop(0.6,'rgba(0,80,180,0.07)');
+      grad.addColorStop(1,'rgba(0,20,60,0.18)');
+      ctx.beginPath();
+      ctx.arc(cx,cy,R,0,Math.PI*2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(0,212,255,0.25)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Latitude lines
+      ctx.strokeStyle = 'rgba(0,212,255,0.08)';
+      ctx.lineWidth = 0.8;
+      for(let lat=-60; lat<=60; lat+=30){
+        ctx.beginPath(); let first=true;
+        for(let lon=-180; lon<=180; lon+=5){
+          const p = project(lon,lat,rot);
+          if(!p){first=true;continue;}
+          first ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y);
+          first=false;
+        }
+        ctx.stroke();
+      }
+
+      // Longitude lines
+      for(let lon=-180; lon<180; lon+=30){
+        ctx.beginPath(); let first=true;
+        for(let lat=-90; lat<=90; lat+=5){
+          const p = project(lon,lat,rot);
+          if(!p){first=true;continue;}
+          first ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y);
+          first=false;
+        }
+        ctx.stroke();
+      }
+
+      // Land masses
+      ctx.strokeStyle = 'rgba(0,212,255,0.55)';
+      ctx.fillStyle = 'rgba(0,212,255,0.07)';
+      ctx.lineWidth = 1.2;
+      for(const shape of lands){
+        for(const poly of shape){
+          ctx.beginPath();
+          let started=false, visible=false;
+          for(const [lon,lat] of poly){
+            const p = project(lon,lat,rot);
+            if(!p){started=false;continue;}
+            started ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y);
+            started=true; visible=true;
+          }
+          if(visible){ ctx.closePath(); ctx.fill(); ctx.stroke(); }
+        }
+      }
+
+      // Whirl rings
+      const time = t * 0.012;
+      for(let i=0;i<4;i++){
+        const phase = time + i*(Math.PI/2);
+        const rx = R*(1.08+i*0.07);
+        const ry = R*(0.28+i*0.04);
+        const alpha = 0.18 - i*0.03;
+        ctx.save();
+        ctx.translate(cx,cy);
+        ctx.rotate(phase);
+        ctx.beginPath();
+        ctx.ellipse(0,0,rx,ry,0,0,Math.PI*2);
+        ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
+        ctx.lineWidth = 1.5 - i*0.2;
+        ctx.setLineDash([8,6]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.restore();
+      }
+      // Extra glow ring
+      for(let i=0;i<3;i++){
+        const phase = -time*0.7 + i*(Math.PI*2/3);
+        ctx.save();
+        ctx.translate(cx,cy);
+        ctx.rotate(phase);
+        ctx.beginPath();
+        ctx.ellipse(0,0,R*1.18,R*0.18,0,0,Math.PI*2);
+        ctx.strokeStyle = `rgba(123,47,255,${0.12-i*0.03})`;
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4,10]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.restore();
+      }
+    }
+
+    function animate(){
+      t++;
+      const rot = t * 0.15;
+      drawGlobe(rot);
+      requestAnimationFrame(animate);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    animate();
+  })();
+  const cards = document.querySelectorAll('.project-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(c => {
+        const tags = c.dataset.tags || '';
+        c.classList.toggle('hidden', f !== 'all' && !tags.includes(f));
+      });
+    });
+  });
+</script>
+</body>
+</html>
   }, { threshold: 0.12 });
   els.forEach(el => obs.observe(el));
 </script>
